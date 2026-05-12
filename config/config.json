@@ -1,0 +1,16 @@
+{
+  "window_size": 60,
+
+  "size_threshold_bytes": 5000000,
+
+  "frequency_threshold": 20,
+
+  "enable_dynamic_baseline": true,
+
+  "max_alerts": 100,
+
+  "ignored_protocols": [
+    "ARP",
+    "ICMP"
+  ]
+}
