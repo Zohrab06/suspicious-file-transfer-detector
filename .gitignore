@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
+
+# Captured traffic
+captures/*.pcap
+
+# Output files
+output/*.csv
+output/*.log
+
+# OS files
+.DS_Store
