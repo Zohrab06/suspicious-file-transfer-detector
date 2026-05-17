@@ -34,12 +34,15 @@ class Detector:
     Detects suspicious file transfer activity using baseline thresholds.
     """
 
-    def __init__(self, events: List[TransferEvent], baseline: BaselineModel, window_size: int = 60):
+    def __init__(self, events: List[TransferEvent], baseline: BaselineModel, window_size: int = 60, size_threshold=None,
+    frequency_threshold=None):
         self.events = events
         self.baseline = baseline
         self.window_size = window_size
 
         self.suspicious: List[SuspiciousEvent] = []
+        self.size_threshold = size_threshold
+        self.frequency_threshold = frequency_threshold
 
     def run(self) -> List[SuspiciousEvent]:
         """
@@ -61,13 +64,17 @@ class Detector:
             # -----------------------------
             # RULE 1: SIZE ANOMALY
             # -----------------------------
-            if total_bytes > self.baseline.max_size_threshold:
+            # if total_bytes > self.baseline.max_size_threshold:
+            size_limit = self.size_threshold or self.baseline.max_size_threshold
+            if total_bytes > size_limit:
                 reasons.append("High transfer volume detected")
 
             # -----------------------------
             # RULE 2: FREQUENCY ANOMALY
             # -----------------------------
-            if count > self.baseline.max_frequency_threshold:
+            # if count > self.baseline.max_frequency_threshold:
+            freq_limit = self.frequency_threshold or self.baseline.max_frequency_threshold
+            if count > freq_limit:
                 reasons.append("Abnormal transfer frequency")
 
             # -----------------------------

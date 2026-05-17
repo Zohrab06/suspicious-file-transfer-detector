@@ -5,9 +5,8 @@ import sys
 
 
 def run_tshark(pcap_path: str, output_csv: str):
-    """
-    Automatically extracts network data from PCAP using tshark.
-    """
+    
+    # Automatically extracts network data from PCAP using tshark.
 
     if not os.path.exists(pcap_path):
         raise FileNotFoundError(f"PCAP not found: {pcap_path}")
